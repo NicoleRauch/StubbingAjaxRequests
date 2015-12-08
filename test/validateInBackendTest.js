@@ -4,15 +4,11 @@ import expect from "must";
 
 describe("validateInBackend", function () {
     beforeEach(function() {
-        var xhr = sinon.FakeXMLHttpRequest;
-
         this.requests = [];
-
-        xhr.onCreate = (request) => {
+        global.XMLHttpRequest = sinon.FakeXMLHttpRequest;
+        global.XMLHttpRequest.onCreate = (request) => {
             this.requests.push(request);
         };
-
-        global.XMLHttpRequest = xhr;
     });
 
     afterEach(function () {
