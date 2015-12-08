@@ -1,0 +1,22 @@
+{
+  "name": "ExampleApplication",
+  "scripts": {
+    "test": "node_modules/.bin/mocha --compilers js:babel/register 'test/*Test.js'"
+  },
+  "devDependencies": {
+    "babel": "5.8.23",
+    "babel-core": "5.4.7",
+    "babel-loader": "5.1.2",
+    "jsdom": "3.1.2",
+    "mocha": "2.3.2",
+    "must": "0.12.0",
+    "react-addons-test-utils": "0.14.0",
+    "react-shallow-renderer-helpers": "1.1.0",
+    "sinon": "1.17.2"
+  },
+  "dependencies": {
+    "nanoajax": "0.3.1",
+    "react": "0.14.0",
+    "react-dom": "0.14.0"
+  }
+}
