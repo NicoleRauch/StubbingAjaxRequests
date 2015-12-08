@@ -23,6 +23,7 @@ describe("validateInBackend", function () {
         validateInBackend(() => {});
 
         expect(this.requests[0].url).to.be("/api/validate");
+        expect(this.requests[0].method).to.be("GET");
     });
 
     it("passes the retrieved data to the callback", function(done) {
