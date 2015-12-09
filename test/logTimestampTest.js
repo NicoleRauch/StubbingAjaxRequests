@@ -16,15 +16,15 @@ describe("logTimestamp", function () {
     });
 
     it("makes request to the backend", function () {
-        logTimestamp(() => {});
+        logTimestamp(123, () => {});
 
         expect(this.requests[0].url).to.be("/api/log");
         expect(this.requests[0].method).to.be("POST");
-        expect(this.requests[0].requestBody).to.match(/timestamp=/);
+        expect(this.requests[0].requestBody).to.be("duration=123");
     });
 
     it("invokes the callback without passing data to it", function(done) {
-        logTimestamp(data => {
+        logTimestamp(250, data => {
             expect(data).to.be(undefined);
             done();
         });

@@ -29,5 +29,6 @@ describe("validateInBackend", function () {
         });
 
         this.requests[0].respond(200, {"Content-Type": "application/json" }, `{ "available": true }`);
+        this.requests[1].respond(200);
     });
 });

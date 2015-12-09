@@ -1,5 +1,11 @@
 import ajax from "nanoajax";
+import logTimestamp from "./logTimestamp.js";
 
 export default function (callback) {
-    ajax.ajax("/api/validate", (code, text) => { callback(JSON.parse(text)) });
+
+    var start = Date.now();
+
+    ajax.ajax("/api/validate", (code, text) => {
+        logTimestamp(Date.now() - start, () => { callback(JSON.parse(text)) });
+    });
 }
