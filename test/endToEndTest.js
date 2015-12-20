@@ -41,7 +41,7 @@ describe("Username end2end test", function () {
         input.value = "goodname";
         TestUtils.Simulate.change(input);
 
-        expect(ReactDOM.findDOMNode(this.component.refs.warning)).to.be(null);
+        expect(ReactDOM.findDOMNode(this.component.refs.warning).innerHTML).to.be("");
     });
 
     it("shows warning when nickname is invalid", function () {
@@ -58,7 +58,7 @@ describe("Username end2end test", function () {
         input.value = "alreadyTaken";
         TestUtils.Simulate.change(input);
 
-        expect(ReactDOM.findDOMNode(this.component.refs.warning)).to.be(null);
+        expect(ReactDOM.findDOMNode(this.component.refs.warning).innerHTML).to.be("Nickname not available!");
     });
 });
 
