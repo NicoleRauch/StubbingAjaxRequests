@@ -29,6 +29,8 @@ describe("UsernameTest", function () {
         input.value = "myname";
         TestUtils.Simulate.change(input);
 
-        expect(this.validateInBackend.firstCall.args).to.eql(["myname"]);
+        expect(this.validateInBackend.firstCall.args.length).to.eql(2);
+        expect(this.validateInBackend.firstCall.args[0]).to.eql("myname");
+        expect(this.validateInBackend.firstCall.args[1]).to.be.a.function();
     });
 });

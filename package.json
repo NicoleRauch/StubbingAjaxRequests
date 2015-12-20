@@ -3,10 +3,19 @@
   "scripts": {
     "test": "node_modules/.bin/mocha --compilers js:babel/register 'test/*Test.js'"
   },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  },
   "devDependencies": {
     "babel": "5.8.23",
     "babel-core": "5.4.7",
     "babel-loader": "5.1.2",
+    "babelify": "6.4.0",
+    "grunt": "0.4.5",
+    "grunt-browserify": "4.0.1",
+    "grunt-cli": "0.1.13",
     "jsdom": "3.1.2",
     "mocha": "2.3.2",
     "must": "0.12.0",
