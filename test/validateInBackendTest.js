@@ -6,7 +6,7 @@ describe("validateInBackend", function () {
     beforeEach(function() {
         this.requests = [];
         global.XMLHttpRequest = sinon.FakeXMLHttpRequest;
-        global.XMLHttpRequest.onCreate = (request) => {
+        global.XMLHttpRequest.onCreate = request => {
             this.requests.push(request);
         };
     });
@@ -18,6 +18,7 @@ describe("validateInBackend", function () {
     it("makes request to the backend", function () {
         validateInBackend("myUsername", () => {});
 
+        expect(this.requests.length).to.be(1);
         expect(this.requests[0].url).to.be("/api/validate?username=myUsername");
         expect(this.requests[0].method).to.be("GET");
     });
