@@ -8,7 +8,7 @@ export default function (username, callback) {
     ajax.ajax("/api/validate?username=" + username, (code, text) => {
         logTimestamp(Date.now() - start, () => {
             if (code === 200) {
-                callback(JSON.parse(text));
+                callback({isAvailable: JSON.parse(text).available});
             } else {
                 callback({isAvailable: false});
             }

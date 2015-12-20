@@ -24,7 +24,7 @@ describe("validateInBackend", function () {
 
     it("passes the retrieved data to the callback", function(done) {
         validateInBackend("validUsername", data => {
-            expect(data).to.eql({available: true});
+            expect(data).to.eql({isAvailable: true});
             done();
         });
 
