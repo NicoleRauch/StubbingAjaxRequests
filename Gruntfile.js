@@ -2,31 +2,8 @@ module.exports = function (grunt) {
     /*eslint camelcase: 0*/
     'use strict';
 
-    // filesets for uglify
-    var files = {
-        'socrates/public/clientscripts/global.js': [
-            'node_modules/jquery/dist/jquery.js',
-            'node_modules/guillotine/js/jquery.guillotine.js',
-            'node_modules/select2/dist/js/select2.js',
-            'node_modules/autonumeric/autonumeric.js',
-            'node_modules/bootstrap/dist/js/bootstrap.js',
-            'node_modules/bootstrap-datepicker/js/bootstrap-datepicker.js',
-            'node_modules/bootstrap-markdown/js/bootstrap-markdown.js',
-            'node_modules/moment-timezone/node_modules/moment/moment.js',
-            'node_modules/drmonty-smartmenus/js/jquery.smartmenus.js',
-            'socrates/build/javascript/jquery.smartmenus.bootstrap-patched.js',
-            'node_modules/jquery-validation/dist/jquery.validate.js',
-            'node_modules/jquery-validation/dist/additional-methods.js',
-            'node_modules/simple-timepicker/dist/simple-timepicker.js',
-            'node_modules/urijs/src/URI.js',
-            'socrates/locales/frontend_en.js',
-            'socrates/frontend/javascript/socrates.js'
-        ]
-    };
-
     grunt.initConfig({
         clean: {
-            build: ['socrates/build/'],
             public: ['clientscripts'],
             options: {force: true}
         },
@@ -46,29 +23,26 @@ module.exports = function (grunt) {
                 dest: 'clientscripts/bundle.js'
             }
         },
-        uglify: {
-            development: {
+        mochaTest: {
+            test: {
                 options: {
-                    mangle: false,
-                    beautify: true
+                    reporter: 'dot',
+                    require: 'babel/register'
                 },
-                files: files
-            },
-            production: {
-                files: files
+                src: ['test/*.js']
             }
         }
     });
 
     // These plugins provide necessary tasks.
     grunt.loadNpmTasks('grunt-browserify');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-mocha-test');
 
-    grunt.registerTask('prepare', ['browserify', 'copy']);
-    grunt.registerTask('frontendtests', ['clean', 'prepare', 'jade', 'uglify:production', 'karma:once', 'uglify:development', 'karma:once', 'istanbul_check_coverage:frontend']);
-    grunt.registerTask('tests', ['prepare', 'frontendtests', 'mocha_istanbul', 'istanbul_check_coverage:server']);
-    grunt.registerTask('deploy_development', ['prepare', 'uglify:development']);
-    grunt.registerTask('deploy_production', ['clean', 'prepare', 'uglify:production']);
+    grunt.registerTask('prepare', ['clean', 'browserify', 'copy']);
+    grunt.registerTask('tests', ['prepare', 'mochaTest']);
 
     // Default task.
-    grunt.registerTask('default', ['tests', 'uglify:development']);
+    grunt.registerTask('default', ['tests']);
 };
